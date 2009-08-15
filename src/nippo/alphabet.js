@@ -84,7 +84,7 @@ Nippo.Alphabet = new Class(Observer, {
   // switches the view to romaji
   showRomaji: function() {
     this.cells.each('showRomaji');
-    this.element.setClass('romaji')
+    this.element.setClass('romaji');
     return this;
   },
   

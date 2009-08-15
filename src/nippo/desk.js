@@ -18,4 +18,4 @@ Nippo.Desk = new Class({
     this.block.update(symbol);
     return this;
   }
-})
+});
