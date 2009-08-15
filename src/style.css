@@ -1,8 +1,8 @@
 div#nippo {
   font-family: 'Lucida Grande', 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Osaka, 'ＭＳ Ｐゴシック', sans-serif;
   position: relative;
-  height: 36em;
-  min-width: 52em;
+  height: 35.5em;
+  min-width: 55.5em;
 }
 
 div#nippo fieldset {
@@ -39,7 +39,7 @@ div.nippo-alphabet-row div {
   height: 1.4em;
   line-height: 1.4em;
   text-align:center;
-  color: #666;
+  color: #733;
   margin-right: .2em;
 }
 div.nippo-alphabet-row div:hover {
@@ -49,6 +49,14 @@ div.nippo-alphabet-row div:hover {
 }
 div.nippo-alphabet-blank {
   visibility: hidden;
+}
+
+div.nippo-alphabet-row div.disabled,
+div.nippo-alphabet-row div.disabled:hover {
+  color: #BBB;
+  background: transparent;
+  text-shadow: none;
+  cursor: default;
 }
 
 div.romaji div.nippo-alphabet-row div {
@@ -62,6 +70,10 @@ div.romaji div.nippo-alphabet-row div {
   display: none;
 }
 
+#nippo-alphabet {
+  position: relative;
+  z-index: 100;
+}
 
 #nippo-alphabet-basic {
   float: left;
@@ -92,9 +104,9 @@ div.romaji div.nippo-alphabet-row div {
 #nippo-stats label {
   width: 9em;
 }
-#nippo-stats a {
+#nippo-stats input {
   float: right;
-  margin-top: .4em;
+  margin-top: 1em;
   text-transform: lowercase;
 }
 
@@ -103,12 +115,12 @@ div.romaji div.nippo-alphabet-row div {
   bottom: 0;
   left: 0;
   width: 100%;
+  z-index: 1;
 }
 #nippo-controls fieldset {
   margin: 0 14em;
-  margin-bottom: .6em;
 }
-#nippo-controls div {
+#nippo-controls div#nippo-controls-level {
   float: left;
   margin-right: 1em;
 }
@@ -117,8 +129,4 @@ div.romaji div.nippo-alphabet-row div {
 }
 #nippo-controls label, #nippo-controls select, #nippo-controls input {
   vertical-align: middle;
-}
-div#nippo-controls-reset {
-  float: right;
-  margin-right: 0;
 }

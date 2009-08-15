@@ -4,29 +4,52 @@
  * @copyright (C) 2009 Nikolay V. Nemshilov aka St.
  */
 Nippo.Controls = new Class(Observer, {
+  EVENTS: $w('levelchange directionchange'),
+  
   initialize: function() {
+    this.$super();
     this.element = $E('div', {id: 'nippo-controls'});
     
     this.levelSelect     = $E('select');
     this.directionSelect = $E('select', {html:
       '<option value="ro-hi">Romaji &rarr; Hiragana</option>'+
-      '<option value="ro-ka">Romaji &rarr; Katakana</option>'+
       '<option value="hi-ro">Hiragana &rarr; Romaji</option>'+
+      '<option value="ro-ka">Romaji &rarr; Katakana</option>'+
       '<option value="ka-ro">Katakana &rarr; Romaji</option>'+
       '<option value="hi-ka">Hiragana &rarr; Katakana</option>'+
       '<option value="ka-hi">Katakana &rarr; Hiragana</option>'
     });
-    this.resetButton     = $E('input', {type: 'button', value: 'Reset'});
     
     this.element.insert($E('fieldset').insert([
       $E('legend', {html: 'Controls'}),
       
       $E('div', {id: 'nippo-controls-level'}).insert([$E('label', {html: 'Level:'}), this.levelSelect]),
-      $E('div', {id: 'nippo-controls-direction'}).insert([$E('label', {html: 'Direction:'}), this.directionSelect]),
-      $E('div', {id: 'nippo-controls-reset'}).insert(this.resetButton)
+      $E('div', {id: 'nippo-controls-direction'}).insert([$E('label', {html: 'Direction:'}), this.directionSelect])
     ]));
+    
+    this.levelSelect.on('change', this.levelChange.bind(this));
+    this.directionSelect.on('change', this.directionChange.bind(this));
   },
   
+  setLevel: function(level) {
+    this.levelSelect.value = level;
+    return this;
+  },
+  
+  setDirection: function(direction) {
+    this.directionSelect.value = direction;
+    return this;
+  },
+  
+  levelChange: function() {
+    return this.fire('levelchange', this.levelSelect.value);
+  },
+  
+  directionChange: function() {
+    return this.fire('directionchange', this.directionSelect.value);
+  },
+  
+  // builds the level-select options
   buildLevels: function(basics, combs) {
     [
       ["Basics", basics], ["Combinations", combs]
@@ -53,5 +76,7 @@ Nippo.Controls = new Class(Observer, {
         )
       );
     }, this);
+    
+    return this;
   }
 });

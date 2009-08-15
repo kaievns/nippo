@@ -59,6 +59,28 @@ Nippo.Alphabet = new Class(Observer, {
     this.build().showHiragana();
   },
   
+  // highlights the level
+  setLevel: function(level) {
+    var passed = false;
+    this.activeLevel = level.split(' ').last();
+    this.activeChars = [];
+    
+    this.cells.each(function(cell) {
+      cell[passed ? 'addClass' : 'removeClass']('disabled');
+      if (!passed) this.activeChars.push(cell.chars);
+      passed = passed | cell.key == this.activeLevel;
+    }, this);
+  },
+  
+  // switches the alphabet by a short name
+  showChars: function(name) {
+    switch(name) {
+      case 'ro': return this.showRomaji();
+      case 'ka': return this.showKatakana();
+      default:   return this.showHiragana();
+    }
+  },
+  
   // switches the view to romaji
   showRomaji: function() {
     this.cells.each('showRomaji');
@@ -82,12 +104,14 @@ Nippo.Alphabet = new Class(Observer, {
   
   // returns the list of basic chars
   getBasics: function() {
-    return this.constructor.BASIC.map(this.parseLine);
+    this.basics = this.basicChars || this.constructor.BASIC.map(this.parseLine);
+    return this.basics;
   },
   
   // returns the list of combinations
   getCombinations: function() {
-    return this.constructor.COMBINATIONS.map(this.parseLine);
+    this.combinations = this.combinations || this.constructor.COMBINATIONS.map(this.parseLine);
+    return this.combinations;
   },
   
 // protected
@@ -117,6 +141,8 @@ Nippo.Alphabet = new Class(Observer, {
         var row = $E('div', {'class': 'nippo-alphabet-row'}).insertTo(pair[1]);
         line.each(function(chars, i) {
           var cell = $ext($E('div').insertTo(row), {
+            key: chars[0],
+            chars: chars,
             showRomaji: function() {
               this.innerHTML = chars[0];
             },
@@ -127,7 +153,10 @@ Nippo.Alphabet = new Class(Observer, {
               this.innerHTML = chars[2];
             }
           });
-          cell.onClick(this.choose.bind(this, chars[0], cell));
+          cell.onClick(function() {
+            if (!cell.hasClass('disabled'))
+              this.choose(cell.key, cell)
+          }.bind(this));
           this.cells.push(cell);
           
           if (line.length == 3 && (i==0 || i==1)) {

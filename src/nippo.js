@@ -17,12 +17,44 @@ var Nippo = new Class(Observer, {
       this.controls.element
     ]);
     
-    var basics = this.alphabet.getBasics();
-    var combs  = this.alphabet.getCombinations();
-    var chars  = basics.concat(basics);
+    // initializing the controls
+    this.controls.buildLevels(
+      this.alphabet.getBasics(),
+      this.alphabet.getCombinations()
+    );
     
-    this.controls.buildLevels(basics, combs);
+    this.controls.setLevel(Cookie.get('nippo-level'));
+    this.controls.setDirection(Cookie.get('nippo-direction'));
+    this.controls.onLevelchange(this.setLevel.bind(this)).levelChange();
+    this.controls.onDirectionchange(this.setDirection.bind(this)).directionChange();
     
-    this.desk.update(chars.random().random().random())
+    this.showNext();
+  },
+  
+// protected
+  
+  setLevel: function(level) {
+    this.alphabet.setLevel(level);
+    Cookie.set('nippo-level', level, {duration: 888});
+    
+    return this.showNext();
+  },
+  
+  setDirection: function(direction) {
+    var pair = direction.split('-');
+    this.alphabet.showChars(pair.last());
+    this.charSet = pair.first();
+    Cookie.set('nippo-direction', direction, {duration: 888});
+    
+    return this.showNext();
+  },
+  
+  showNext: function() {
+    var chars = this.alphabet.activeChars.random();
+    this.desk.update(
+      this.charSet == 'ro' ? chars[0] : this.charSet == 'ka' ? chars[2] : chars[1]
+    );
+    
+    return this;
   }
 });
