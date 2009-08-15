@@ -1,0 +1,124 @@
+div#nippo {
+  font-family: 'Lucida Grande', 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', Osaka, 'ＭＳ Ｐゴシック', sans-serif;
+  position: relative;
+  height: 36em;
+  min-width: 52em;
+}
+
+div#nippo fieldset {
+  border: none;
+  border-top: 1px solid gray;
+  padding: .5em;
+  padding-top: .2em;
+}
+
+div#nippo fieldset legend {
+  font-family: Verdana;
+  font-weight: bold;
+  font-size: 120%;
+  color: #888;
+}
+
+div#nippo label {
+  display: inline-block;
+  * display: inline;
+  * zoom: 1;
+  font-weight: bold;
+  color: #666;
+}
+
+div.nippo-alphabet-row {
+  height: 1.4em;
+  line-height: 1.4em;
+  font-size: 160%;
+}
+div.nippo-alphabet-row div {
+  float: left;
+  cursor: pointer;
+  width: 1.4em;
+  height: 1.4em;
+  line-height: 1.4em;
+  text-align:center;
+  color: #666;
+  margin-right: .2em;
+}
+div.nippo-alphabet-row div:hover {
+  color: brown;
+  background: #DED;
+  text-shadow: #888 3px 3px 3px;
+}
+div.nippo-alphabet-blank {
+  visibility: hidden;
+}
+
+div.romaji div.nippo-alphabet-row div {
+  font-family: Arial;
+}
+
+#nippo-alphabet-combinations div.nippo-alphabet-row div {
+  width: 2.4em;
+}
+#nippo-alphabet-combinations div.nippo-alphabet-blank {
+  display: none;
+}
+
+
+#nippo-alphabet-basic {
+  float: left;
+}
+
+#nippo-alphabet-combinations {
+  float: right;
+}
+
+#nippo-desk {
+  margin: 0 14em;
+}
+
+#nippo-desk div {
+  height: 2.2em;
+  line-height: 2.2em;
+  text-align: center;
+  font-size: 11em;
+  text-shadow: #888 .04em .04em .08em;
+}
+
+#nippo-stats {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  width: 12.8em;
+}
+#nippo-stats label {
+  width: 9em;
+}
+#nippo-stats a {
+  float: right;
+  margin-top: .4em;
+  text-transform: lowercase;
+}
+
+#nippo-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+#nippo-controls fieldset {
+  margin: 0 14em;
+  margin-bottom: .6em;
+}
+#nippo-controls div {
+  float: left;
+  margin-right: 1em;
+}
+#nippo-controls label {
+  margin-right: .3em;
+}
+#nippo-controls label, #nippo-controls select, #nippo-controls input {
+  vertical-align: middle;
+}
+div#nippo-controls-reset {
+  float: right;
+  margin-right: 0;
+}
