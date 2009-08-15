@@ -11,14 +11,14 @@ Nippo.Controls = new Class(Observer, {
     this.element = $E('div', {id: 'nippo-controls'});
     
     this.levelSelect     = $E('select');
-    this.directionSelect = $E('select', {html:
-      '<option value="ro-hi">Romaji &rarr; Hiragana</option>'+
-      '<option value="hi-ro">Hiragana &rarr; Romaji</option>'+
-      '<option value="ro-ka">Romaji &rarr; Katakana</option>'+
-      '<option value="ka-ro">Katakana &rarr; Romaji</option>'+
-      '<option value="hi-ka">Hiragana &rarr; Katakana</option>'+
-      '<option value="ka-hi">Katakana &rarr; Hiragana</option>'
-    }).setValue(Cookie.get('nippo-direction'));
+    this.directionSelect = $E('select').insert([
+      $E('option', {value: 'ro-hi', html: 'Romaji &rarr; Hiragana'}),
+      $E('option', {value: 'hi-ro', html: 'Hiragana &rarr; Romaji'}),
+      $E('option', {value: 'ro-ka', html: 'Romaji &rarr; Katakana'}),
+      $E('option', {value: 'ka-ro', html: 'Katakana &rarr; Romaji'}),
+      $E('option', {value: 'hi-ka', html: 'Hiragana &rarr; Katakana'}),
+      $E('option', {value: 'ka-hi', html: 'Katakana &rarr; Hiragana'})
+    ]).setValue(Cookie.get('nippo-direction'));
     
     this.element.insert($E('fieldset').insert([
       $E('legend', {html: 'Controls'}),

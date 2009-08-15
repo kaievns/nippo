@@ -76,11 +76,17 @@ div.romaji div.nippo-alphabet-row div {
 }
 
 #nippo-alphabet-basic {
-  float: left;
+  position: absolute;
+*  width: 12.8em;
+  left: 0px;
+  top: 0px;
 }
 
 #nippo-alphabet-combinations {
-  float: right;
+  position: absolute;
+*  width: 12.9em;
+  right: 0px;
+  top: 0px;
 }
 
 #nippo-desk {

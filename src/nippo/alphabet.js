@@ -47,7 +47,7 @@ Nippo.Alphabet = new Class(Observer, {
       'bya: 73,83    byu: 73,85    byo: 73,87',
       'pya: 74,83    pyu: 74,85    pyo: 74,87',
       'mya: 7E,83    myu: 7E,85    myo: 7E,87',
-      'rya: 8A,83    ryu: 8A,85    ryo: 8A,87',
+      'rya: 8A,83    ryu: 8A,85    ryo: 8A,87'
     ]
   },
   

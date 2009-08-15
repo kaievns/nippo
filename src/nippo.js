@@ -27,8 +27,6 @@ var Nippo = new Class(Observer, {
     this.controls.onDirectionchange(this.setDirection.bind(this)).directionChange();
     
     this.alphabet.onChoose(this.choose.bind(this));
-    
-    this.showNext();
   },
   
 // protected
