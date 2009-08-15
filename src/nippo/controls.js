@@ -18,7 +18,7 @@ Nippo.Controls = new Class(Observer, {
       '<option value="ka-ro">Katakana &rarr; Romaji</option>'+
       '<option value="hi-ka">Hiragana &rarr; Katakana</option>'+
       '<option value="ka-hi">Katakana &rarr; Hiragana</option>'
-    });
+    }).setValue(Cookie.get('nippo-direction'));
     
     this.element.insert($E('fieldset').insert([
       $E('legend', {html: 'Controls'}),
@@ -31,23 +31,39 @@ Nippo.Controls = new Class(Observer, {
     this.directionSelect.on('change', this.directionChange.bind(this));
   },
   
-  setLevel: function(level) {
-    this.levelSelect.value = level;
-    return this;
-  },
-  
-  setDirection: function(direction) {
-    this.directionSelect.value = direction;
-    return this;
-  },
-  
   levelChange: function() {
+    Cookie.set('nippo-level', this.levelSelect.value, {duration: 888});
     return this.fire('levelchange', this.levelSelect.value);
   },
   
   directionChange: function() {
+    Cookie.set('nippo-direction', this.directionSelect.value, {duration: 888});
     return this.fire('directionchange', this.directionSelect.value);
   },
+  
+  // levels up
+  levelUp: function() {
+    var options = $A(this.levelSelect.getElementsByTagName('option'));
+    var current = options.first(function(i) { return i.selected });
+    
+    if (current && current != options.last()) {
+      this.levelSelect.value = options[options.indexOf(current)+1].value;
+      this.levelChange();
+    }
+  },
+  
+  // levels down
+  levelDown: function() {
+    var options = $A(this.levelSelect.getElementsByTagName('option'));
+    var current = options.first(function(i) { return i.selected });
+    
+    if (current && current != options.first()) {
+      this.levelSelect.value = options[options.indexOf(current)-1].value;
+      this.levelChange();
+    }
+  },
+  
+// private
   
   // builds the level-select options
   buildLevels: function(basics, combs) {
@@ -76,6 +92,8 @@ Nippo.Controls = new Class(Observer, {
         )
       );
     }, this);
+    
+    this.levelSelect.value = Cookie.get('nippo-level');
     
     return this;
   }

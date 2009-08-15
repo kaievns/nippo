@@ -23,10 +23,10 @@ var Nippo = new Class(Observer, {
       this.alphabet.getCombinations()
     );
     
-    this.controls.setLevel(Cookie.get('nippo-level'));
-    this.controls.setDirection(Cookie.get('nippo-direction'));
     this.controls.onLevelchange(this.setLevel.bind(this)).levelChange();
     this.controls.onDirectionchange(this.setDirection.bind(this)).directionChange();
+    
+    this.alphabet.onChoose(this.choose.bind(this));
     
     this.showNext();
   },
@@ -35,7 +35,6 @@ var Nippo = new Class(Observer, {
   
   setLevel: function(level) {
     this.alphabet.setLevel(level);
-    Cookie.set('nippo-level', level, {duration: 888});
     
     return this.showNext();
   },
@@ -44,7 +43,6 @@ var Nippo = new Class(Observer, {
     var pair = direction.split('-');
     this.alphabet.showChars(pair.last());
     this.charSet = pair.first();
-    Cookie.set('nippo-direction', direction, {duration: 888});
     
     return this.showNext();
   },
@@ -54,6 +52,24 @@ var Nippo = new Class(Observer, {
     this.desk.update(
       this.charSet == 'ro' ? chars[0] : this.charSet == 'ka' ? chars[2] : chars[1]
     );
+    this.currentKey = chars[0];
+    
+    return this;
+  },
+  
+  choose: function(key) {
+    var correct = key == this.currentKey;
+    
+    this.stats.count(correct);
+    
+    if (this.stats.levelsUp()) {
+      this.controls.levelUp();
+    } else if (this.stats.levelsDown()) {
+      this.controls.levelDown();
+    }
+    
+    this.desk.block.highlight(correct ? '#AFA':'#FAA');
+    this.showNext.bind(this).delay(200);
     
     return this;
   }

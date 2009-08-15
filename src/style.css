@@ -88,8 +88,8 @@ div.romaji div.nippo-alphabet-row div {
 }
 
 #nippo-desk div {
-  height: 2.2em;
-  line-height: 2.2em;
+  height: 2.6em;
+  line-height: 2.6em;
   text-align: center;
   font-size: 11em;
   text-shadow: #888 .04em .04em .08em;
@@ -100,6 +100,7 @@ div.romaji div.nippo-alphabet-row div {
   right: 0px;
   bottom: 0px;
   width: 12.8em;
+  z-index: 100;
 }
 #nippo-stats label {
   width: 9em;
